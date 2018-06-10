@@ -45,9 +45,13 @@ async def my_background_task():
 
 async def on_message(message):
         if message.content.startswith('phrase'):
-                DDRSet()
-                await client.send_file(message.channel, 'DDRBotSetOfTheWeek.jpg')
-                
+                global SetCount
+                if SetCount == 0:
+                        await client.send_message(message.channel, "DDRBot limit reached for the day.")
+                else:
+                        DDRSet()
+                        await client.send_file(message.channel, 'DDRBotSetOfTheWeek.jpg')
+                        SetCount -= 1
 
 
 #client.loop.create_task(my_background_task())
