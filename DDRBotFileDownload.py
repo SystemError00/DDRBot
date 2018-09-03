@@ -6,7 +6,7 @@ import urllib.request
 import requests
 
 def DownloadDatabase():
-    urllib.request.urlretrieve("http://skillattack.com/sa4/data/master_music.txt", "DDRSONGLIST.csv")
+    urllib.request.urlretrieve("http://skillattack.com/sa4/data/master_music.txt", "master_music.txt")
     #urllib.request.urlretrieve("https://p.eagate.573.jp/game/ddr/ddra/p/images/binary_jk.html?img="%s % (code),"sample.jpg")
 
 def DownloadImages(code, i):
