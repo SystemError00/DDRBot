@@ -1,62 +1,58 @@
 import discord
 import asyncio
-import DDRSetImage
+import DDRBotSet
 import image
 import random
 from random import randint
 import csv
-import os
+import os, sys
+import gc
+import psutil
 
+SetCount = 1
+ResponseCount = 3
 client = discord.Client()
 
-@client.event
-async def on_ready():
-        print("Beep Boop DDR Bot")
-        print("ID: ",client.user.id)
-        print("Up and runnin'!")
-        print('--------')
+#@client.event
+#async def on_ready():
+#        print("Beep Boop DDR Bot")
+#        print("ID: ",client.user.id)
+#        print("Up and runnin'!")
+#        print('--------')
 
-def DDRSet():
-        try:
-                First = random.randint(1,767)
-                Second = random.randint(1,767)
-                Third = random.randint(1,767)
-                DDRSetImage.DDRSet(First, Second, Third)
-        except:
-                print("Error building DDR Set")
-                DDRSet()
-
-'''
 async def my_background_task():
     await client.wait_until_ready()
+    #channel = discord.Object(id='396518242145009674')
+    channel = discord.Object(id='374025686933045251')
     while not client.is_closed:
-        Phrases = ["Braaaaap", "Bopadopalous!", "Bep...", ">:(", "Womp...", "Beep beep~", "!"]
-        Intro = random.choice(Phrases)
-        await client.send_message(channel, Intro)
-        await client.send_message(channel, "DDRBot Song of the Day!!")
-        Song_Of_The_Day = random.randint(1,746)
-        await client.send_file(channel, '%d.jpg' % (Song_Of_The_Day))
-        print("This is a test output")
-        await asyncio.sleep(86400) # task runs every 24 hours'''
-
+        await client.send_message(channel, "DDRBot Set of the Day Test!!")
+        #Song_Of_The_Day = random.randint(1,784)
+        #await client.send_file(channel, '/Users/err0r/Desktop/DDRBot/images/%d.jpg' % (Song_Of_The_Day))
+        #print("Song of the day posted!")
+        #del Song_Of_The_Day
+        #print(" ")
+        DDRBotSet.DDRSet()
+        await client.send_file(channel, 'DDRBotSetOfTheWeek.jpg')
+        print(process.memory_info().rss / 1024)  #I wanted to see how much memory was being used here.
+        await asyncio.sleep(60) # task runs every 24 hours
+        gc.collect()
+        gc.garbage
+        python = sys.executable
+        os.execl(python, python, * sys.argv)    #Restart the program to try to keep memory usage low
         
 @client.event
-#channel = discord.Object(id='xxxxxxxxxxxxxxxxxx')
+#channel = discord.Object(id='374025686933045251')
 
 async def on_message(message):
-        if message.content.startswith('phrase'):
-                global SetCount
-                if SetCount == 0:
-                        await client.send_message(message.channel, "DDRBot limit reached for the day.")
-                else:
-                        DDRSet()
-                        await client.send_file(message.channel, 'DDRBotSetOfTheWeek.jpg')
-                        SetCount -= 1
+        if message.content.startswith('Thank you, DDRBot!'):
+                await client.add_reaction(message,'\U0001F621')
+                print(process.memory_info().rss / 1024)
 
 
-#client.loop.create_task(my_background_task())
-client.run("ID")
-                
+process = psutil.Process(os.getpid())
+client.loop.create_task(my_background_task())
+client.run("Mzc0MDE1NDAyOTgxNzIwMDc0.DNbS5Q.JbbNDrfUq-r1KgadRjD8PQo53dI")
+
 
 
 #ThisIsAHardCodedPassphrase
