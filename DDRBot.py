@@ -22,8 +22,8 @@ client = discord.Client()
 
 async def my_background_task():
     await client.wait_until_ready()
-    #channel = discord.Object(id='396518242145009674')
-    channel = discord.Object(id='374025686933045251')
+    #channel = discord.Object(id='')
+    channel = discord.Object(id='')
     while not client.is_closed:
         await client.send_message(channel, "DDRBot Set of the Day Test!!")
         #Song_Of_The_Day = random.randint(1,784)
@@ -41,7 +41,7 @@ async def my_background_task():
         os.execl(python, python, * sys.argv)    #Restart the program to try to keep memory usage low
         
 @client.event
-#channel = discord.Object(id='374025686933045251')
+#channel = discord.Object(id='')
 
 async def on_message(message):
         if message.content.startswith('Thank you, DDRBot!'):
@@ -51,7 +51,7 @@ async def on_message(message):
 
 process = psutil.Process(os.getpid())
 client.loop.create_task(my_background_task())
-client.run("Mzc0MDE1NDAyOTgxNzIwMDc0.DNbS5Q.JbbNDrfUq-r1KgadRjD8PQo53dI")
+client.run("")
 
 
 
